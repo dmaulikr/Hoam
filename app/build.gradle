@@ -31,22 +31,28 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    // UI
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:cardview-v7:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
-    compile 'me.relex:circleindicator:1.2.2@aar'
+    def androidSupportVersion = '25.3.1'
+    def rxBindingVersion = '2.0.0'
+    def rxJavaVersion = '2.0.1'
+    def retrofitVersion = '2.3.0'
+    def daggerVersion = '2.11'
+    def moxyVersion = '1.5.3'
+
+    // Support
+    compile "com.android.support:appcompat-v7:$androidSupportVersion"
+    compile "com.android.support:design:$androidSupportVersion"
+    compile "com.android.support:cardview-v7:$androidSupportVersion"
+    compile "com.android.support:recyclerview-v7:$androidSupportVersion"
 
     // Moxy
-    compile 'com.arello-mobile:moxy:1.5.3'
-    compile 'com.arello-mobile:moxy-app-compat:1.5.3'
-    compile 'com.arello-mobile:moxy-compiler:1.5.3'
-    annotationProcessor 'com.arello-mobile:moxy-compiler:1.5.3'
+    compile "com.arello-mobile:moxy:$moxyVersion"
+    compile "com.arello-mobile:moxy-app-compat:$moxyVersion"
+    compile "com.arello-mobile:moxy-compiler:$moxyVersion"
+    annotationProcessor "com.arello-mobile:moxy-compiler:$moxyVersion"
 
-    // Dagger 2
-    compile 'com.google.dagger:dagger:2.11'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+    // Dagger
+    compile "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 
     // Utils
     compile 'com.github.bumptech.glide:glide:3.7.0'
@@ -54,13 +60,29 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
     compile 'com.facebook.stetho:stetho:1.5.0'
     compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    compile 'me.relex:circleindicator:1.2.2@aar'
 
-    // Rx
-    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    // Retrofit
+    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
+    // RxJava
+    compile "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    compile "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
+
+    // Mosby
+    compile 'com.hannesdorfmann.mosby3:mvi:3.0.4'
+
+    // RxBinding
+    compile "com.jakewharton.rxbinding2:rxbinding:2.0.0"
+    compile "com.jakewharton.rxbinding2:rxbinding-support-v4:$rxBindingVersion"
+    compile "com.jakewharton.rxbinding2:rxbinding-design:$rxBindingVersion"
+    compile "com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:$rxBindingVersion"
+
+    // ButterKnife
+    compile 'com.jakewharton:butterknife:8.7.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:3.0'

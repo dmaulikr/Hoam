@@ -7,6 +7,7 @@ import com.solvo.hoam.data.network.response.AdResponse;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public class ApiAdDataSource {
@@ -29,7 +30,7 @@ public class ApiAdDataSource {
         );
     }
 
-    public Single<Ad> getAd(String adId) {
+    public Observable<Ad> getAd(String adId) {
         return restService.getAd(adId);
     }
 }

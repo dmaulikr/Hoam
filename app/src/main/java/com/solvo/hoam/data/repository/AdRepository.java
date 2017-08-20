@@ -22,8 +22,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
+import io.reactivex.CompletableEmitter;
+import io.reactivex.CompletableOnSubscribe;
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
+import io.reactivex.SingleOnSubscribe;
 
 public class AdRepository {
 
@@ -84,20 +90,17 @@ public class AdRepository {
 
     }
 
-    public Single<AdEntity> getAd(String adId) {
+    public Observable<AdEntity> getAd(String adId) {
         return apiAdDataSource.getAd(adId)
                 .map(ad -> {
                     AdModel adModel = adDataSource.getAd(adId);
-                    return adModel != null ? buildAdEntity(ad, adModel.isFavorite()) : buildAdEntity(ad, false);
+                    return adModel != null ? buildAdEntity(ad, true) : buildAdEntity(ad, false);
                 });
     }
 
-    private Single<List<AdModel>> getFavoriteAdModels() {
-        return Single.create(e -> e.onSuccess(adDataSource.getFavoriteAds()));
-    }
-
     public Single<List<AdEntity>> getFavoriteAds() {
-        return getFavoriteAdModels().toObservable()
+        return Single.create((SingleOnSubscribe<List<AdModel>>) e -> e.onSuccess(adDataSource.getAds()))
+                .toObservable()
                 .flatMap(ads -> Observable.fromIterable(ads))
                 .map(ad -> {
                     List<ImageModel> imageModelList = imageDataSource.getImagesByAdId(ad.getId());
@@ -119,6 +122,32 @@ public class AdRepository {
                     return adEntity;
                 })
                 .toList();
+    }
+
+    public Observable<AdEntity> addToFavorites(AdEntity adEntity) {
+        return Observable.just(adEntity)
+                .map(ad -> {
+                    List<ImageModel> imageList = imageModelEntityMapper.indirect(ad.getImageList());
+                    AdModel adModel = adModelEntityMapper.indirect(ad);
+                    imageDataSource.saveImages(imageList);
+                    adDataSource.saveAd(adModel);
+
+                    ad.setFavorite(true);
+                    return ad;
+                });
+    }
+
+    public Observable<AdEntity> removeFromFavorites(AdEntity adEntity) {
+        return Observable.just(adEntity)
+                .map(ad -> {
+                    List<ImageModel> imageList = imageModelEntityMapper.indirect(ad.getImageList());
+                    AdModel adModel = adModelEntityMapper.indirect(ad);
+                    imageDataSource.deleteImages(imageList);
+                    adDataSource.deleteAd(adModel);
+
+                    ad.setFavorite(false);
+                    return ad;
+                });
     }
 
     public Completable setAdFavorite(AdEntity ad, boolean isFavorite) {

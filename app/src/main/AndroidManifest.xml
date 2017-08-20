@@ -50,6 +50,15 @@
                 android:value=".presentation.ui.activity.MainActivity"/>
         </activity>
         <activity
+            android:name=".view.detail.DetailActivity"
+            android:label="@string/screen_ad"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.ui.activity.MainActivity"/>
+        </activity>
+        <activity
             android:name=".presentation.ui.activity.ImageActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTop">

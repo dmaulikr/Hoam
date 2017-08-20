@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/error_connection_view"
+        android:id="@+id/error_view"
         layout="@layout/error_connection_view"
         android:visibility="gone"/>
 

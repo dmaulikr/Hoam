@@ -7,6 +7,7 @@ import com.solvo.hoam.data.network.response.LocationResponse;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -34,5 +35,5 @@ public interface RestService {
     );
 
     @GET("ad/{id}")
-    Single<Ad> getAd(@Path("id") String adId);
+    Observable<Ad> getAd(@Path("id") String adId);
 }

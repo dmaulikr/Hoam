@@ -13,6 +13,7 @@ import com.solvo.hoam.R;
 import com.solvo.hoam.domain.model.AdEntity;
 import com.solvo.hoam.presentation.ui.activity.AdActivity;
 import com.solvo.hoam.presentation.ui.helper.AdHelper;
+import com.solvo.hoam.view.detail.DetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,8 +65,7 @@ public class AdListAdapter extends RecyclerView.Adapter<AdListAdapter.AdHolder> 
         private TextView priceTextView;
         private TextView categoryTextView;
         private TextView createdDateTextView;
-
-        private String adId;
+        private AdEntity ad;
 
         AdHolder(View itemView) {
             super(itemView);
@@ -80,7 +80,7 @@ public class AdListAdapter extends RecyclerView.Adapter<AdListAdapter.AdHolder> 
         }
 
         void bindAd(AdEntity ad) {
-            adId = ad.getId();
+            this.ad = ad;
 
             titleTextView.setText(ad.getTitle());
 
@@ -115,7 +115,8 @@ public class AdListAdapter extends RecyclerView.Adapter<AdListAdapter.AdHolder> 
 
         @Override
         public void onClick(View v) {
-            context.startActivity(AdActivity.buildIntent(context, adId));
+//            context.startActivity(AdActivity.buildIntent(context, adId));
+            DetailActivity.start(context, ad);
         }
     }
 }

@@ -194,7 +194,7 @@
         </android.support.v4.widget.NestedScrollView>
 
         <include
-            android:id="@+id/error_connection_view"
+            android:id="@+id/error_view"
             layout="@layout/error_connection_view"
             android:visibility="gone"/>
 

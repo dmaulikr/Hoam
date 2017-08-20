@@ -2,10 +2,12 @@ package com.solvo.hoam.data.repository.datasource;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.solvo.hoam.data.db.cursorwrapper.AdCursorWrapper;
 import com.solvo.hoam.data.db.model.AdModel;
 import com.solvo.hoam.data.db.table.AdTable;
+import com.solvo.hoam.view.detail.DetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,16 +16,13 @@ import javax.inject.Inject;
 
 public class AdDataSource {
 
+    private static final String TAG = AdDataSource.class.getSimpleName();
+
     private SQLiteDatabase sqLiteDatabase;
 
     @Inject
     public AdDataSource(SQLiteDatabase sqLiteDatabase) {
         this.sqLiteDatabase = sqLiteDatabase;
-
-        sqLiteDatabase.delete(
-                AdTable.TABLE_NAME,
-                AdTable.IS_FAVORITE + " = ?",
-                new String[] { "0" });
     }
 
     private ContentValues buildContentValues(AdModel ad) {
@@ -42,7 +41,6 @@ public class AdDataSource {
         values.put(AdTable.CREATED_AT, ad.getCreatedAt());
         values.put(AdTable.UPDATED_AT, ad.getUpdatedAt());
         values.put(AdTable.IS_FREE, ad.isFree() ? 1 : 0);
-        values.put(AdTable.IS_FAVORITE, ad.isFavorite() ? 1 : 0);
         return values;
     }
 
@@ -111,26 +109,6 @@ public class AdDataSource {
         } finally {
             cursor.close();
         }
-    }
-
-    public List<AdModel> getFavoriteAds() {
-        List<AdModel> adList = new ArrayList<>();
-
-        AdCursorWrapper cursor = query(
-                AdTable.IS_FAVORITE + " = ?",
-                new String[] { "1" });
-
-        try {
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                adList.add(cursor.getAd());
-                cursor.moveToNext();
-            }
-        } finally {
-            cursor.close();
-        }
-
-        return adList;
     }
 
     public void deleteAd(AdModel ad) {

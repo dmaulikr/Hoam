@@ -9,6 +9,7 @@ import com.solvo.hoam.presentation.mvp.presenter.AdPresenter;
 import com.solvo.hoam.presentation.mvp.presenter.FavoritesPresenter;
 import com.solvo.hoam.presentation.mvp.presenter.FilterPresenter;
 import com.solvo.hoam.presentation.mvp.presenter.SplashPresenter;
+import com.solvo.hoam.view.detail.DetailPresenter;
 
 import javax.inject.Singleton;
 
@@ -25,4 +26,5 @@ public interface ApplicationComponent {
     void inject(AdListPresenter presenter);
     void inject(SplashPresenter presenter);
     void inject(FavoritesPresenter presenter);
+    void inject(DetailPresenter presenter);
 }

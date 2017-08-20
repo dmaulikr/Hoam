@@ -30,7 +30,7 @@ public class SplashActivity extends MvpAppCompatActivity implements SplashView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        errorConnectionView = findViewById(R.id.error_connection_view);
+        errorConnectionView = findViewById(R.id.error_view);
         tryAgainButton = (Button) findViewById(R.id.try_again_button);
         tryAgainButton.setOnClickListener(v -> presenter.onTryAgainClicked());
 

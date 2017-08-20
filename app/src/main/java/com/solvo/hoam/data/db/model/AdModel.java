@@ -16,14 +16,13 @@ public class AdModel {
     private String createdAt;
     private String updatedAt;
     private boolean isFree;
-    private boolean isFavorite;
 
     public AdModel() {
     }
 
     public AdModel(String id, String title, String text, long price, String phone, int views,
                    String authorId, String authorName, String categoryId, boolean isPremium,
-                   String cityId, String createdAt, String updatedAt, boolean isFree, boolean isFavorite) {
+                   String cityId, String createdAt, String updatedAt, boolean isFree) {
         this.id = id;
         this.title = title;
         this.text = text;
@@ -38,7 +37,6 @@ public class AdModel {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.isFree = isFree;
-        this.isFavorite = isFavorite;
     }
 
     public String getId() {
@@ -151,13 +149,5 @@ public class AdModel {
 
     public void setFree(boolean free) {
         isFree = free;
-    }
-
-    public boolean isFavorite() {
-        return isFavorite;
-    }
-
-    public void setFavorite(boolean favorite) {
-        isFavorite = favorite;
     }
 }

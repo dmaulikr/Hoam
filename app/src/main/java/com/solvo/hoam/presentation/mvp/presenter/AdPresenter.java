@@ -37,8 +37,7 @@ public class AdPresenter extends MvpPresenter<AdView> {
     }
 
     public void fetchData() {
-        compositeDisposable.add(interactor.getAd(adId)
-                .subscribe(ad -> handleSuccess(ad), throwable -> handleError(throwable)));
+//        compositeDisposable.add(interactor.getAd(adId).subscribe(ad -> handleSuccess(ad), throwable -> handleError(throwable)));
     }
 
     private void handleSuccess(AdEntity ad) {

@@ -85,7 +85,7 @@ public class AdActivity extends MvpAppCompatActivity implements AdView {
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
         contentLayout = findViewById(R.id.content_layout);
         imageLayout = findViewById(R.id.image_layout);
-        errorConnectionView = findViewById(R.id.error_connection_view);
+        errorConnectionView = findViewById(R.id.error_view);
         tryAgainButton = (Button) findViewById(R.id.try_again_button);
         tryAgainButton.setOnClickListener(v -> presenter.onTryAgainClicked());
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
@@ -118,15 +118,15 @@ public class AdActivity extends MvpAppCompatActivity implements AdView {
         toolbar.setOnMenuItemClickListener(item -> onMenuItemSelected(item));
 
         favoriteMenuItem = toolbar.getMenu().findItem(R.id.action_favorite);
-        unfavoriteMenuItem = toolbar.getMenu().findItem(R.id.action_unfavorite);
+        unfavoriteMenuItem = toolbar.getMenu().findItem(R.id.action_favorite);
     }
 
     private boolean onMenuItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_favorite:
+            case R.id.action_unfavorite:
                 presenter.onFavorite(true);
                 return true;
-            case R.id.action_unfavorite:
+            case R.id.action_favorite:
                 presenter.onFavorite(false);
             default:
                 return super.onOptionsItemSelected(item);

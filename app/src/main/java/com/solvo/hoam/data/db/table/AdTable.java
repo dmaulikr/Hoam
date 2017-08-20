@@ -18,7 +18,6 @@ public class AdTable {
     public static final String CREATED_AT = "created_at";
     public static final String UPDATED_AT = "updated_at";
     public static final String IS_FREE = "is_free";
-    public static final String IS_FAVORITE = "is_favorite";
 
     public static final String SQL_CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "(" +
             ID + " INTEGER NOT NULL PRIMARY KEY, " +
@@ -34,8 +33,7 @@ public class AdTable {
             CITY_ID + " TEXT, " +
             CREATED_AT + " TEXT NOT NULL, " +
             UPDATED_AT + " TEXT NOT NULL, " +
-            IS_FREE + " INTEGER NOT NULL, " +
-            IS_FAVORITE + " INTEGER NOT NULL);";
+            IS_FREE + " INTEGER NOT NULL);";
 
     public static final String SQL_DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
 }
